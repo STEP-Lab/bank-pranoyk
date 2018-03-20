@@ -23,8 +23,10 @@ public class Account {
         return balance;
     }
 
-    public float withdraw(float amount) {
+    public void withdraw(float amount) throws MinimumBalanceException {
+        if(this.balance - amount < 1000) {
+            throw new MinimumBalanceException();
+        }
         balance-=amount;
-        return balance;
     }
 }

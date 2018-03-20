@@ -37,8 +37,13 @@ public class AccountTest {
     }
 
     @Test
-    public void withdrawAmount() {
+    public void withdrawAmount() throws MinimumBalanceException {
         account.withdraw(1000);
         assertThat(account.getAccountBalance(),is(1000.0f));
+    }
+
+    @Test(expected = MinimumBalanceException.class)
+    public void checkWithdrawAmount() throws MinimumBalanceException {
+        account.withdraw(1500);
     }
 }
