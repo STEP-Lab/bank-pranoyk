@@ -5,14 +5,22 @@ public class Account {
     private float balance;
 
     public Account(String accountNumber, float balance) throws MinimumBalanceException, InvalidAccountNumberException {
-        if (!accountNumber.matches("\\d{4}-\\d{4}")) {
-            throw new InvalidAccountNumberException();
-        }
+        validateAccountNumber(accountNumber);
         this.accountNumber = accountNumber;
+        validateMinimumBalance(balance);
+        this.balance = balance;
+    }
+
+    private void validateMinimumBalance(float balance) throws MinimumBalanceException {
         if (balance < 1000) {
             throw new MinimumBalanceException();
         }
-        this.balance = balance;
+    }
+
+    private void validateAccountNumber(String accountNumber) throws InvalidAccountNumberException {
+        if (!accountNumber.matches("\\d{4}-\\d{4}")) {
+            throw new InvalidAccountNumberException();
+        }
     }
 
     public String getAccountNumber() {
@@ -24,9 +32,7 @@ public class Account {
     }
 
     public void withdraw(float amount) throws MinimumBalanceException {
-        if(this.balance - amount < 1000) {
-            throw new MinimumBalanceException();
-        }
+        validateMinimumBalance(this.balance - amount);
         balance-=amount;
     }
 }
