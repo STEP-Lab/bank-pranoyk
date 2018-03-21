@@ -32,8 +32,23 @@ public class AccountTest {
     }
 
     @Test(expected = InvalidAccountNumberException.class)
-    public void checkValidAccountNumber() throws InvalidAccountNumberException, MinimumBalanceException {
+    public void checkAccountNumberConsistsOfOneSymbol() throws InvalidAccountNumberException, MinimumBalanceException {
         new Account("12121212",1000);
+    }
+
+    @Test(expected = InvalidAccountNumberException.class)
+    public void checkAccountNumberHasOnlyNumerics() throws InvalidAccountNumberException, MinimumBalanceException {
+        new Account("asdf-wqee",1000);//not working
+    }
+
+    @Test(expected = InvalidAccountNumberException.class)
+    public void checkAccountNumberHasASpecificSymbol() throws InvalidAccountNumberException, MinimumBalanceException {
+        new Account("1212$1212",1000);//not working
+    }
+
+    @Test(expected = InvalidAccountNumberException.class)
+    public void checkAccountNumberHasExactlyEightDigitsAndASymbolInBetween() throws InvalidAccountNumberException, MinimumBalanceException {
+        new Account("1212-2121232",1000);//not working
     }
 
     @Test
