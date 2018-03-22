@@ -1,12 +1,9 @@
 package com.thoughtworks.step.bank;
 
 public class Account {
-    private final String accountNumber;
     private float balance;
 
-    public Account(String accountNumber, float balance) throws MinimumBalanceException, InvalidAccountNumberException {
-        validateAccountNumber(accountNumber);
-        this.accountNumber = accountNumber;
+    public Account(AccountNumber accountNumber, float balance) throws MinimumBalanceException {
         validateMinimumBalance(balance);
         this.balance = balance;
     }
@@ -15,16 +12,6 @@ public class Account {
         if (balance < 1000) {
             throw new MinimumBalanceException();
         }
-    }
-
-    private void validateAccountNumber(String accountNumber) throws InvalidAccountNumberException {
-        if (!accountNumber.matches("\\d{4}-\\d{4}")) {
-            throw new InvalidAccountNumberException();
-        }
-    }
-
-    public String getAccountNumber() {
-        return accountNumber;
     }
 
     public float getAccountBalance() {
