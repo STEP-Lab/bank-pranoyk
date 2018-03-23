@@ -1,5 +1,5 @@
-import com.thoughtworks.step.bank.DebitTransaction;
-import com.thoughtworks.step.bank.Transaction;
+package com.thoughtworks.step.bank;
+
 import org.junit.Test;
 
 import java.util.Date;
