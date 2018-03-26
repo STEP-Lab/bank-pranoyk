@@ -1,24 +1,31 @@
 package com.thoughtworks.step.bank;
 
 public class Account {
-    private float balance;
+    private double balance;
+    private final AccountNumber accountNumber;
 
-    public Account(AccountNumber accountNumber, float balance) throws MinimumBalanceException {
-        validateMinimumBalance(balance);
+    private Account(AccountNumber accountNumber, double balance) {
+        this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
-    private void validateMinimumBalance(float balance) throws MinimumBalanceException {
+    public static Account createAccount(String number, double balance) throws InvalidAccountNumberException, MinimumBalanceException {
+        AccountNumber accountNumber = new AccountNumber(number);
+        validateMinimumBalance(balance);
+        return new Account(accountNumber, balance);
+    }
+
+    private static void validateMinimumBalance(double balance) throws MinimumBalanceException {
         if (balance < 1000) {
             throw new MinimumBalanceException();
         }
     }
 
-    public float getAccountBalance() {
+    public double getAccountBalance() {
         return balance;
     }
 
-    public void withdraw(float amount) throws MinimumBalanceException {
+    public void withdraw(double amount) throws MinimumBalanceException {
         validateMinimumBalance(this.balance - amount);
         balance-=amount;
     }

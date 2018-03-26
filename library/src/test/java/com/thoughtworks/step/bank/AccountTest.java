@@ -12,23 +12,23 @@ public class AccountTest {
 
     @Before
     public void setUp() throws Exception, MinimumBalanceException {
-        account = new Account(new AccountNumber("1212-1212"), 2000);
+        account = Account.createAccount("1212-1212",2000);
     }
 
     @Test
     public void checkAccountBalance() {
-        assertThat(account.getAccountBalance(),is(2000.0f));
+        assertThat(account.getAccountBalance(),is(2000.0));
     }
 
     @Test(expected = MinimumBalanceException.class)
     public void checkMinimumBalance() throws MinimumBalanceException, InvalidAccountNumberException {
-        new Account(new AccountNumber("1212-1212"),500);
+        Account.createAccount("1212-1212",500);
     }
 
     @Test
     public void withdrawAmount() throws MinimumBalanceException {
         account.withdraw(1000);
-        assertThat(account.getAccountBalance(),is(1000.0f));
+        assertThat(account.getAccountBalance(),is(1000.0));
     }
 
     @Test(expected = MinimumBalanceException.class)
