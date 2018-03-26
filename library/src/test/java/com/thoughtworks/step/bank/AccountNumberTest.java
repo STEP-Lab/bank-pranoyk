@@ -5,21 +5,21 @@ import org.junit.Test;
 public class AccountNumberTest {
     @Test(expected = InvalidAccountNumberException.class)
     public void checkAccountNumberConsistsOfOneSymbol() throws InvalidAccountNumberException {
-        new AccountNumber("12121212");
+        AccountNumber.createAccountNumber("12121212");
     }
 
     @Test(expected = InvalidAccountNumberException.class)
     public void checkAccountNumberHasOnlyNumerics() throws InvalidAccountNumberException {
-        new AccountNumber("asdf-wqee");
+        AccountNumber.createAccountNumber("asdf-wqee");
     }
 
     @Test(expected = InvalidAccountNumberException.class)
     public void checkAccountNumberHasASpecificSymbol() throws InvalidAccountNumberException {
-        new AccountNumber("1212$1212");
+        AccountNumber.createAccountNumber("1212$1212");
     }
 
     @Test(expected = InvalidAccountNumberException.class)
     public void checkAccountNumberHasExactlyEightDigitsAndASymbolInBetween() throws InvalidAccountNumberException {
-        new AccountNumber("1212-2121232");
+        AccountNumber.createAccountNumber("1212-2121232");
     }
 }
