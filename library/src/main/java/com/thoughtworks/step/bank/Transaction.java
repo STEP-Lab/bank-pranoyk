@@ -29,7 +29,14 @@ public abstract class Transaction {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(amount, to);
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "amount=" + amount +
+                ", to='" + to + '\'' +
+                '}';
     }
 }
