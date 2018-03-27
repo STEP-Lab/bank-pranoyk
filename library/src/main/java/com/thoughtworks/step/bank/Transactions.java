@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Transactions {
 
     protected ArrayList<Transaction> list;
+    private Transactions transactions;
 
     public Transactions() {
         this.list = new ArrayList<>();
@@ -19,7 +20,7 @@ public class Transactions {
         this.list.add(new CreditTransaction(amount, name));
     }
 
-    public Transactions filterByAmountGreaterThan(double amount) {
+    public Transactions getTransactionAbove(double amount) {
         Transactions transactions = new Transactions();
         for (Transaction transaction : list) {
             if (transaction.amount > amount) {
@@ -35,10 +36,30 @@ public class Transactions {
         }
     }
 
-    public Transactions filterByAmountLesserThan(double amount) {
+    public Transactions getTransactionBelow(double amount) {
         Transactions transactions = new Transactions();
         for (Transaction transaction : list) {
             if (transaction.amount < amount) {
+                transactions.list.add(transaction);
+            }
+        }
+        return transactions;
+    }
+
+    public Transactions getAllCreditTransactions() {
+        Transactions transactions = new Transactions();
+        for (Transaction transaction : list) {
+            if (transaction.isCreditTransaction()){
+                transactions.list.add(transaction);
+            }
+        }
+        return transactions;
+    }
+
+    public Transactions getAllDebitTransactions() {
+        Transactions transactions = new Transactions();
+        for (Transaction transaction : list) {
+            if (transaction.isDebitTransaction()){
                 transactions.list.add(transaction);
             }
         }

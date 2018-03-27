@@ -11,6 +11,7 @@ import java.util.Date;
 
 import static org.hamcrest.core.IsCollectionContaining.hasItem;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 
 public class TransactionsTest {
@@ -65,7 +66,7 @@ public class TransactionsTest {
         transactions.credit(1000,"Ashish");
         transactions.credit(100,"Ashish");
         transactions.credit(5000,"Ashish");
-        Transactions filteredTransaction = this.transactions.filterByAmountGreaterThan(1000);
+        Transactions filteredTransaction = this.transactions.getTransactionAbove(1000);
         assertThat(filteredTransaction.list,hasItems(new CreditTransaction(5000,"Ashish")));
     }
 
@@ -74,8 +75,33 @@ public class TransactionsTest {
         transactions.credit(1000,"Ashish");
         transactions.credit(100,"Ashish");
         transactions.credit(5000,"Ashish");
-        Transactions filteredTransaction = this.transactions.filterByAmountLesserThan(1000);
+        Transactions filteredTransaction = this.transactions.getTransactionBelow(1000);
         assertThat(filteredTransaction.list,hasItems(new CreditTransaction(100,"Ashish")));
     }
 
+    @Test
+    public void filterAllCreditTransactions() {
+        transactions.credit(1000,"Ashish");
+        transactions.debit(100,"Ashish");
+        transactions.credit(5000,"Ashish");
+        Transactions allCreditTransactions = this.transactions.getAllCreditTransactions();
+        CreditTransaction creditTransaction = new CreditTransaction(1000, "Ashish");
+        CreditTransaction creditTransaction1 = new CreditTransaction(5000, "Ashish");
+        DebitTransaction debitTransaction = new DebitTransaction(100, "Ashish");
+        assertThat(allCreditTransactions.list,hasItems(creditTransaction,creditTransaction1));
+        assertThat(allCreditTransactions.list,not(hasItems(debitTransaction)));
+    }
+
+    @Test
+    public void filterAllDebitTransactions() {
+        transactions.credit(1000,"Ashish");
+        transactions.debit(100,"Ashish");
+        transactions.credit(5000,"Ashish");
+        Transactions allDebitTransactions = this.transactions.getAllDebitTransactions();
+        CreditTransaction creditTransaction = new CreditTransaction(1000, "Ashish");
+        CreditTransaction creditTransaction1 = new CreditTransaction(5000, "Ashish");
+        DebitTransaction debitTransaction = new DebitTransaction(100, "Ashish");
+        assertThat(allDebitTransactions.list,hasItems(debitTransaction));
+        assertThat(allDebitTransactions.list,not(hasItems(creditTransaction,creditTransaction1)));
+    }
 }
