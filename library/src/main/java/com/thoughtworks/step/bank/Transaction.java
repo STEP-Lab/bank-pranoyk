@@ -35,7 +35,8 @@ public abstract class Transaction {
     @Override
     public String toString() {
         return "Transaction{" +
-                "amount=" + amount +
+                "date=" + date +
+                ", amount=" + amount +
                 ", to='" + to + '\'' +
                 '}';
     }

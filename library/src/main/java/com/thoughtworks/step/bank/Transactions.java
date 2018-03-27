@@ -34,4 +34,14 @@ public class Transactions {
             writer.println(transaction.toString());
         }
     }
+
+    public Transactions filterByAmountLesserThan(double amount) {
+        Transactions transactions = new Transactions();
+        for (Transaction transaction : list) {
+            if (transaction.amount < amount) {
+                transactions.list.add(transaction);
+            }
+        }
+        return transactions;
+    }
 }

@@ -18,7 +18,7 @@ public class TransactionsTest {
     private Transactions transactions;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         transactions = new Transactions();
     }
 
@@ -61,14 +61,21 @@ public class TransactionsTest {
     }
 
     @Test
-    public void filterTransactionsByAmount() {
+    public void filterTransactionsByAmountGreaterThan() {
         transactions.credit(1000,"Ashish");
         transactions.credit(100,"Ashish");
-        transactions.credit(200,"Ashish");
         transactions.credit(5000,"Ashish");
-        transactions.credit(150,"Ashish");
-        transactions.credit(1500,"Ashish");
         Transactions filteredTransaction = this.transactions.filterByAmountGreaterThan(1000);
         assertThat(filteredTransaction.list,hasItems(new CreditTransaction(5000,"Ashish")));
     }
+
+    @Test
+    public void filterTransactionsByAmountLesserThan() {
+        transactions.credit(1000,"Ashish");
+        transactions.credit(100,"Ashish");
+        transactions.credit(5000,"Ashish");
+        Transactions filteredTransaction = this.transactions.filterByAmountLesserThan(1000);
+        assertThat(filteredTransaction.list,hasItems(new CreditTransaction(100,"Ashish")));
+    }
+
 }
