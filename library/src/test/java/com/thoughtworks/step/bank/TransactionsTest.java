@@ -3,9 +3,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -104,4 +102,26 @@ public class TransactionsTest {
         assertThat(allDebitTransactions.list,hasItems(debitTransaction));
         assertThat(allDebitTransactions.list,not(hasItems(creditTransaction,creditTransaction1)));
     }
+
+//    @Test
+//    public void should_write_to_csv_file() throws IOException {
+//        transactions.credit(1000,"Ashish");
+//        ArrayList<String> result = new ArrayList<>();
+//        String headers = "date,amount,source,type";
+//        CsvPrinter csvPrinter;
+//        try (FileWriter fileWriter = new FileWriter("foo.csv") {
+//            @Override
+//            public Writer append(CharSequence csq) {
+//                result.add((String) csq);
+//                return this;
+//            }
+//        }) {
+//            csvPrinter = new CsvPrinter(fileWriter, headers);
+//        }
+//        csvPrinter.writeHeaders();
+//        assertThat(result,hasItems(headers,String.valueOf(creditOf1000.getAmount()),"CREDIT"));
+//        assertThat(result,not(hasItems("DEBIT")));
+//        transactions.debit(100,"AnotherAccount");
+//        assertThat(result,hasItems("DEBIT"));
+//        csvPrinter.close();
 }

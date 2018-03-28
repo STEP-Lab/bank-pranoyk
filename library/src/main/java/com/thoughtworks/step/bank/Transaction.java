@@ -7,8 +7,6 @@ public abstract class Transaction {
     protected Date date;
     protected final double amount;
     protected final String to;
-    protected boolean isCredit = false;
-    protected boolean isDebit = false;
 
     public Transaction(Date date, double amount, String to) {
         this.date = date;
@@ -41,13 +39,5 @@ public abstract class Transaction {
                 ", amount=" + amount +
                 ", to='" + to + '\'' +
                 '}';
-    }
-
-    public boolean isCreditTransaction() {
-        return isCredit;
-    }
-
-    public boolean isDebitTransaction() {
-        return isDebit;
     }
 }

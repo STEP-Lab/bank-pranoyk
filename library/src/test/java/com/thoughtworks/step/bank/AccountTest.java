@@ -27,12 +27,12 @@ public class AccountTest {
 
     @Test
     public void withdrawAmount() throws MinimumBalanceException {
-        account.withdraw(1000);
+        account.debit(1000);
         assertThat(account.getAccountBalance(),is(1000.0));
     }
 
     @Test(expected = MinimumBalanceException.class)
     public void checkWithdrawAmount() throws MinimumBalanceException {
-        account.withdraw(1500);
+        account.debit(1500);
     }
 }

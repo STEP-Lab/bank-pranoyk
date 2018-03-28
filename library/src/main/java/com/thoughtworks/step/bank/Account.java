@@ -25,7 +25,7 @@ public class Account {
         return balance;
     }
 
-    public void withdraw(double amount) throws MinimumBalanceException {
+    public void debit(double amount) throws MinimumBalanceException {
         validateMinimumBalance(this.balance - amount);
         balance-=amount;
     }

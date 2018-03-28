@@ -49,7 +49,7 @@ public class Transactions {
     public Transactions getAllCreditTransactions() {
         Transactions transactions = new Transactions();
         for (Transaction transaction : list) {
-            if (transaction.isCreditTransaction()){
+            if (transaction instanceof CreditTransaction){
                 transactions.list.add(transaction);
             }
         }
@@ -59,7 +59,7 @@ public class Transactions {
     public Transactions getAllDebitTransactions() {
         Transactions transactions = new Transactions();
         for (Transaction transaction : list) {
-            if (transaction.isDebitTransaction()){
+            if (transaction instanceof DebitTransaction){
                 transactions.list.add(transaction);
             }
         }
