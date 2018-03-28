@@ -1,8 +1,8 @@
 package com.thoughtworks.step.bank;
 
 public class Account {
-    private double balance;
     private final AccountNumber accountNumber;
+    private double balance;
 
     private Account(AccountNumber accountNumber, double balance) {
         this.accountNumber = accountNumber;
